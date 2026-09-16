@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Perfil Inversor</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 680px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .intro-quote {
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .test-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .icon {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    .description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: var(--card-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .question-title {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background-color: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 8px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background-color: rgba(56, 189, 248, 0.05);
+    }
+
+    /* Sección de Resultado */
+    #result-section {
+      display: none;
+      text-align: center;
+    }
+
+    .result-badge {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .profile-title {
+      font-size: 2rem;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .profile-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      padding-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-btn-whatsapp {
+      background-color: var(--success);
+      color: #ffffff;
+    }
+
+    .cta-btn-email {
+      background-color: var(--accent);
+      color: #0f172a;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      padding-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <header>
+    <div class="brand">TEST DE PERFIL INVERSOR</div>
+    <div class="subtitle">Evaluación de Tolerancia al Riesgo</div>
+  </header>
+
+  <div class="intro-quote">“El mejor portafolio no es el más agresivo: es el que podés sostener.”</div>
+
+  <!-- Sección de Preguntas -->
+  <section id="quiz-section">
+    <div class="test-header">
+      <div class="icon">◈</div>
+      <div>
+        <h1>Test de Perfil Inversor</h1>
+        <p class="description">8 preguntas para conocer de forma orientativa cuánto riesgo podrías tolerar y sostener.</p>
+      </div>
+    </div>
+
+    <div class="progress-info">
+      <span id="question-step">Pregunta 1 de 8</span>
+      <span id="progress-percentage">0%</span>
+    </div>
+
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+
+    <div class="question-title" id="question-text">Cargando pregunta...</div>
+    <div class="options-container" id="options-container"></div>
+  </section>
+
+  <!-- Sección de Resultados -->
+  <section id="result-section">
+    <div class="result-badge">RESULTADO ORIENTATIVO</div>
+    <h2 class="profile-title" id="profile-name">—</h2>
+    <p class="profile-description" id="profile-desc">—</p>
+
+    <div class="disclaimer">
+      Este test es educativo y orientativo. No reemplaza una evaluación completa de objetivos, situación financiera, liquidez, conocimientos y capacidad de asumir pérdidas.
+    </div>
+
+    <div class="cta-container">
+      <a id="btn-whatsapp" href="#" target="_blank" rel="noopener" class="cta-btn cta-btn-whatsapp">
+        CONTACTAR POR WHATSAPP
+      </a>
+      <a id="btn-email" href="#" class="cta-btn cta-btn-email">
+        ENVIAR RESULTADO POR EMAIL
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Asesoría Financiera</strong>
+    <div>Herramientas educativas para ordenar tus ahorros y pensar tus objetivos.</div>
+  </footer>
+</main>
+
+<script>
+  const questions = [
+    {
+      title: "¿Cuál es tu horizonte principal para este dinero?",
+      options: [
+        { text: "Menos de 1 año", score: 1 },
+        { text: "Entre 1 y 3 años", score: 2 },
+        { text: "Entre 3 y 5 años", score: 3 },
+        { text: "Más de 5 años", score: 4 }
+      ]
+    },
+    {
+      title: "Si tu portafolio cayera 20% en pocos meses, ¿qué harías?",
+      options: [
+        { text: "Vendería todo para evitar más pérdidas", score: 1 },
+        { text: "Vendería una parte para reducir la incertidumbre", score: 2 },
+        { text: "Mantendría la estrategia sin hacer cambios", score: 3 },
+        { text: "Aprovecharía las caídas para comprar más", score: 4 }
+      ]
+    },
+    {
+      title: "¿Qué buscás principalmente al invertir?",
+      options: [
+        { text: "Preservar el capital sin asumir riesgos", score: 1 },
+        { text: "Superar levemente la inflación con riesgo bajo", score: 2 },
+        { text: "Un equilibrio entre crecimiento y estabilidad", score: 3 },
+        { text: "Maximizar las ganancias a largo plazo", score: 4 }
+      ]
+    },
+    {
+      title: "¿Cuánta experiencia tenés con inversiones?",
+      options: [
+        { text: "Ninguna o muy poca (solo plazos fijos/dólar)", score: 1 },
+        { text: "Básica (fondos comunes, bonos simples)", score: 2 },
+        { text: "Intermedia (acciones, CEDEARs, etc.)", score: 3 },
+        { text: "Avanzada (operación activa en mercados)", score: 4 }
+      ]
+    },
+    {
+      title: "¿Qué caída temporal máxima sentirías que podés tolerar sin cambiar el plan?",
+      options: [
+        { text: "Hasta un 5%", score: 1 },
+        { text: "Entre 5% y 15%", score: 2 },
+        { text: "Entre 15% y 30%", score: 3 },
+        { text: "Más del 30%", score: 4 }
+      ]
+    },
+    {
+      title: "¿Cuándo podrías necesitar una parte importante de este dinero?",
+      options: [
+        { text: "En cualquier momento (necesito liquidez inmediata)", score: 1 },
+        { text: "En los próximos 6 a 12 meses", score: 2 },
+        { text: "En un plazo de 1 a 3 años", score: 3 },
+        { text: "No lo necesitaré en varios años", score: 4 }
+      ]
+    },
+    {
+      title: "Respecto de tus gastos habituales, ¿qué tan estable es tu capacidad de ahorro?",
+      options: [
+        { text: "Inestable o con ingresos muy variables", score: 1 },
+        { text: "Moderada, con variaciones según el mes", score: 2 },
+        { text: "Estable, ahorro un monto fijo casi siempre", score: 3 },
+        { text: "Muy alta y con respaldo financiero sólido", score: 4 }
+      ]
+    },
+    {
+      title: "¿Cómo te sentís frente a una inversión que puede subir mucho, pero también caer fuerte?",
+      options: [
+        { text: "Muy incómodo / Me genera ansiedad", score: 1 },
+        { text: "Algo preocupado, prefiero fluctuaciones menores", score: 2 },
+        { text: "Acepto la volatilidad si el potencial es mayor", score: 3 },
+        { text: "Cómodo, entiendo que la volatilidad es parte del mercado", score: 4 }
+      ]
+    }
+  ];
+
+  let currentQuestionIndex = 0;
+  let totalScore = 0;
+
+  const phone = "5491159000389";
+  const email = "polorossi@gmail.com";
+
+  const questionStepEl = document.getElementById("question-step");
+  const progressPercentageEl = document.getElementById("progress-percentage");
+  const progressBarEl = document.getElementById("progress-bar");
+  const questionTextEl = document.getElementById("question-text");
+  const optionsContainerEl = document.getElementById("options-container");
+
+  const quizSectionEl = document.getElementById("quiz-section");
+  const resultSectionEl = document.getElementById("result-section");
+  const profileNameEl = document.getElementById("profile-name");
+  const profileDescEl = document.getElementById("profile-desc");
+  const btnWhatsappEl = document.getElementById("btn-whatsapp");
+  const btnEmailEl = document.getElementById("btn-email");
+
+  function loadQuestion() {
+    const currentQ = questions[currentQuestionIndex];
+    const progressPercent = Math.round((currentQuestionIndex / questions.length) * 100);
+
+    questionStepEl.textContent = `Pregunta ${currentQuestionIndex + 1} de ${questions.length}`;
+    progressPercentageEl.textContent = `${progressPercent}%`;
+    progressBarEl.style.width = `${progressPercent}%`;
+
+    questionTextEl.textContent = currentQ.title;
+    optionsContainerEl.innerHTML = "";
+
+    currentQ.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.textContent = opt.text;
+      btn.onclick = () => selectOption(opt.score);
+      optionsContainerEl.appendChild(btn);
+    });
+  }
+
+  function selectOption(score) {
+    totalScore += score;
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < questions.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    quizSectionEl.style.display = "none";
+    resultSectionEl.style.display = "block";
+
+    let profile = "";
+    let description = "";
+
+    if (totalScore <= 12) {
+      profile = "Conservador";
+      description = "Tu prioridad absoluta es la seguridad y la preservación del capital. Prefieres retornos estables y bajos antes que asumir fluctuaciones en tu dinero.";
+    } else if (totalScore <= 22) {
+      profile = "Moderado";
+      description = "Buscas un equilibrio entre crecimiento y estabilidad. Estás dispuesto a tolerar cierta volatilidad a cambio de superar la inflación y obtener rendimientos aceptables.";
+    } else {
+      profile = "Agresivo";
+      description = "Buscas maximizar el rendimiento de tu capital a largo plazo. Comprendes que las fluctuaciones fuertes son parte del mercado y estás dispuesto a asumirlas.";
+    }
+
+    profileNameEl.textContent = profile;
+    profileDescEl.textContent = description;
+
+    const message = `Hola, hice el test de perfil inversor y mi resultado fue: ${profile}. Quisiera recibir más información sobre estrategias.`;
+    
+    btnWhatsappEl.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    btnEmailEl.href = `mailto:${email}?subject=${encodeURIComponent('Resultado Test Perfil Inversor')}&body=${encodeURIComponent(message)}`;
+  }
+
+  // Inicializar el test al cargar
+  loadQuestion();
+</script>
+
+</body>
+</html>
